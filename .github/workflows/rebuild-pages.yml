@@ -23,21 +23,17 @@ jobs:
       run: |
         echo "Pushed from branch: ${{ github.ref_name }}"
 
-    # Copy the directory based on the branch
-    - name: Copy directory based on branch
-      run: |
-        cp -r pages temppages
-
     # Commit and push changes to 'pages' branch
     - name: Copy changes to pages branch
       run: |
+        cp -r pages temppages
         git checkout pages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
           for file in * ; do rm -rf "../ghpages/$file" ; done
           cd ..
-          cp -r temppages/* ghpages/.
+          cp -ar temppages/* ghpages/.
         else
           echo "Copying from other branches location to pages branch"
           rm -rf "ghpages/${{github.ref_name}}"
@@ -49,7 +45,7 @@ jobs:
         git add ghpages
         git commit -am "Update from ${{ github.ref_name }}"
         git push
-        rm -rm temppages ghpages
+        rm -rf temppages ghpages
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
