@@ -39,6 +39,7 @@ jobs:
         else
           echo "Copying from other branches location to pages branch"
           cp -r temppages "pages/${{github.ref_name}}"
+        done
 
     # Commit and push changes to 'pages' branch
     - name: Push changes to pages branch
