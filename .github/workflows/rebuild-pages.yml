@@ -28,6 +28,10 @@ jobs:
       run: |
         cp -r pages temppages
         git fetch
+        echo "git remote"
+        git remote
+        echo "git branch"
+        git branch
         git checkout origin/allpages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
