@@ -47,8 +47,8 @@ jobs:
         git config --global user.email "autopages@keybard.svalboard.app"
         git config --global user.name "AutoPages"
         git add .
-        git commit -m "Update from ${{ github.ref_name }}"
-        git push origin pages
+        git commit -am "Update from ${{ github.ref_name }}"
+        git push
 
     # Deploy to github pages
     - name: Deploy to GitHub Pages
