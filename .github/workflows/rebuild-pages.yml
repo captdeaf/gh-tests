@@ -3,7 +3,7 @@ name: Push pages to pages
 on:
   push:
     branches-ignore:
-      - pages
+      - githubpages
 
 permissions:
   contents: read
