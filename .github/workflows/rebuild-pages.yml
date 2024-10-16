@@ -23,7 +23,7 @@ jobs:
     # Copy the directory based on the branch
     - name: Copy directory based on branch
       run: |
-        cp -r pages/* temppages
+        cp -r pages temppages
     
     # Checkout the 'pages' branch
     - name: Checkout 'pages' branch
