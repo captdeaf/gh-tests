@@ -32,7 +32,8 @@ jobs:
         git remote
         echo "git branch"
         git branch
-        git checkout origin/allpages
+        #git checkout origin/allpages
+        git switch allpages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
