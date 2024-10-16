@@ -1,0 +1,49 @@
+name: Push pages to pages
+
+on:
+  push:
+    branches:
+      - master
+      - textfit
+      # Add more branches if needed
+
+jobs:
+  push-directory-to-pages:
+    runs-on: ubuntu-latest
+    steps:
+    # Check out the repository
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Ensure you are on the correct branch
+    - name: Get the branch name
+      run: echo "Pushed from branch: ${{ github.ref_name }}"
+
+    # Copy the directory based on the branch
+    - name: Copy directory based on branch
+      run: |
+        cp -r pages/* temppages
+    
+    # Checkout the 'pages' branch
+    - name: Checkout 'pages' branch
+      run: |
+        git checkout pages
+
+    # Copy the files from the specific location to the 'pages' branch
+    - name: Copy to pages branch
+      run: |
+        if [[ "${{ github.ref_name }}" == "master" ]]; then
+          echo "Copying from master location to pages branch"
+          cp -r temppages/* pages/.
+        else
+          echo "Copying from other branches location to pages branch"
+          cp -r temppages "pages/${{github.ref_name}}"
+
+    # Commit and push changes to 'pages' branch
+    - name: Push changes to pages branch
+      run: |
+        git config --global user.email "autopages@keybard.svalboard.app"
+        git config --global user.name "AutoPages"
+        git add .
+        git commit -m "Update from ${{ github.ref_name }}"
+        git push origin pages
