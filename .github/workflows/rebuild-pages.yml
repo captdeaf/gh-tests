@@ -27,7 +27,8 @@ jobs:
     - name: Copy changes to allpages branch
       run: |
         cp -r pages temppages
-        git checkout -f allpages
+        git fetch
+        git checkout allpages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
