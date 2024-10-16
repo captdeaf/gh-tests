@@ -24,10 +24,10 @@ jobs:
         echo "Pushed from branch: ${{ github.ref_name }}"
 
     # Commit and push changes to 'pages' branch
-    - name: Copy changes to pages branch
+    - name: Copy changes to allpages branch
       run: |
         cp -r pages temppages
-        git checkout -f pages
+        git checkout -f allpages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
