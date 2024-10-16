@@ -17,7 +17,8 @@ jobs:
 
     # Ensure you are on the correct branch
     - name: Get the branch name
-      run: echo "Pushed from branch: ${{ github.ref_name }}"
+      run: |
+        echo "Pushed from branch: ${{ github.ref_name }}"
 
     # Copy the directory based on the branch
     - name: Copy directory based on branch
