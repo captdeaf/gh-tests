@@ -34,15 +34,19 @@ jobs:
         git checkout pages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
+          cd temppages
+          for file in * ; do rm -rf "../ghpages/$file" ; done
+          cd ..
           cp -r temppages/* ghpages/.
         else
           echo "Copying from other branches location to pages branch"
+          rm -rf "ghpages/${{github.ref_name}}"
           cp -r temppages "ghpages/${{github.ref_name}}"
         fi
         git config --global user.email "autopages@keybard.svalboard.app"
         git config --global user.name "AutoPages"
-        echo hi > pages/foot
-        git add pages
+        echo hi > ghpages/foot
+        git add ghpages
         git commit -am "Update from ${{ github.ref_name }}"
         git push
         rm -rm temppages ghpages
