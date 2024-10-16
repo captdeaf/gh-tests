@@ -28,12 +28,13 @@ jobs:
       run: |
         cp -r pages temppages
         git checkout pages
+        ls
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
           for file in * ; do rm -rf "../ghpages/$file" ; done
           cd ..
-          cp -ar temppages/* ghpages/.
+          cp -ar temppages/* ghpages/
         else
           echo "Copying from other branches location to pages branch"
           rm -rf "ghpages/${{github.ref_name}}"
