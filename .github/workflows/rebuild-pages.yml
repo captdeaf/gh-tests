@@ -28,8 +28,7 @@ jobs:
       run: |
         cp -r pages temppages
         git fetch
-        git remote show
-        git checkout allpages
+        git checkout origin/allpages
         if [[ "${{ github.ref_name }}" == "master" ]]; then
           echo "Copying from master location to pages branch"
           cd temppages
@@ -46,8 +45,7 @@ jobs:
         echo hi > ghpages/foot
         git add ghpages
         git commit -am "Update from ${{ github.ref_name }}"
-        git push
-        rm -rf temppages ghpages
+        git push origin allpages
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
