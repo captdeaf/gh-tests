@@ -39,7 +39,7 @@ jobs:
         else
           echo "Copying from other branches location to pages branch"
           cp -r temppages "pages/${{github.ref_name}}"
-        done
+        fi
 
     # Commit and push changes to 'pages' branch
     - name: Push changes to pages branch
@@ -49,3 +49,8 @@ jobs:
         git add .
         git commit -m "Update from ${{ github.ref_name }}"
         git push origin pages
+
+    # Deploy to github pages
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
