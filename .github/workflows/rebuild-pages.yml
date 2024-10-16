@@ -6,6 +6,11 @@ on:
       - '*'
       - '!pages'
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   push-directory-to-pages:
     runs-on: ubuntu-latest
